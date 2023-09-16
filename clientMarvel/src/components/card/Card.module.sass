@@ -1,0 +1,48 @@
+@import "./../../styles/variables.sass"
+@import "../../styles/fonts.sass"
+
+.card
+  display: flex
+  flex-direction: column
+  color: rgb(255, 255, 255)
+  transition: box-shadow 300ms cubic-bezier(0.4, 0, 0.2, 1) 0ms
+  border: 1px solid rgb(60, 60, 60)
+  border-radius: 12px
+  overflow: hidden
+  height: 100%
+  background: rgb(0, 0, 0) !important
+  box-shadow: rgba(255, 255, 255, 0.2) 0px 0px 20px 0px !important
+  .card__imgContainer
+    min-height: 200px
+    position: relative
+    .card__imgBody
+      position: absolute
+      top: 0px
+      left: 0px
+      height: 100%
+      width: 100%
+      object-fit: contain
+      background: white
+      img
+        width: 100%
+        height: 100%
+        object-fit: cover
+  .card__description
+    display: flex
+    flex-direction: column
+    gap: 20px
+    flex-grow: 1
+    padding: 16px
+    .parag
+      opacity: 0.8
+      font-size: 13px
+  .cart__btn
+    display: flex
+    flex-direction: column
+    gap: 20px
+    flex-grow: 0
+    padding: 16px
+.btn__body
+  display: flex
+  justify-content: space-between
+  gap: 30px

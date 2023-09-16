@@ -1,0 +1,38 @@
+@import "./reset.scss"
+@import "./variables.sass"
+@import "./fonts.sass"
+
+*
+  box-sizing: border-box
+  margin: 0
+
+body
+  width: 100%
+  font-family: $Poppins
+  color: #0f001a
+  overflow-x: hidden
+  background: #fbfbfb
+
+#root
+  height: 100%
+
+.containerGlobal
+  max-width: 1440px
+  margin: 0 auto
+  padding: 0 25px
+  @include breakpoint($point: 2)
+    padding: 0 15px
+
+.paper__rounding
+  border: 1px solid #e0e0e0
+  border-radius: 12px
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px
+  padding: 26px
+
+.paper__sharp
+  border: 1px solid #e0e0e0
+  border-radius: 0
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px
+  padding: 26px

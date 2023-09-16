@@ -1,0 +1,95 @@
+@import url("https://fonts.googleapis.com/css?family=Poppins:regular,500,600,700&display=swap")
+@import url("https://fonts.googleapis.com/css?family=Roboto:regular,500,600,700&display=swap")
+@import url("https://fonts.googleapis.com/css?family=Manrope:regular,500&display=swap")
+
+$Poppins: "Poppins", sans-serif
+$Roboto: "Roboto", sans-serif
+$Manrope: "Manrope", sans-serif
+
+// color
+$light_f: #fff
+$light_FB: #FBFBFB
+
+$dark_00: #000
+$dark2_1F: #1F1F1F
+
+$borderRadius: 3px
+
+// box shadow gradient
+$box-shadow: 5px 20px 50px rgba(74, 153, 211, 0.2)
+$linear-gradient: linear-gradient(180.99deg, rgba(255, 255, 255, 0) 6.19%, rgba(100, 181, 246, 0.6) 103.09%)
+
+$w_max: 1440
+$point_zero: 1440
+
+// Міксин для скидання стилів кнопки
+@mixin btnReset
+  font-family: inherit
+  outline: none
+  border: none
+  background: none
+  letter-spacing: inherit
+  color: inherit
+  font-size: inherit
+  text-align: inherit
+  padding: 0
+
+//mixin
+$point_5: 1120
+$point_4: 1024
+$point_3: 768
+$point_2: 520
+$point_1: 360
+
+// breakpoints
+@mixin breakpoint($point)
+  @if $point == zero
+    @media (max-width: ($point_zer + px))
+      @content
+
+  @else if $point == 5
+    @media (max-width: ($point_5 + px))
+      @content
+
+  @else if $point == 4
+    @media (max-width: ($point_4 + px))
+      @content
+
+  @else if $point == 3
+    @media (max-width: ($point_3 + px))
+      @content
+
+  @else if $point == 2
+    @media (max-width: ($point_2 + px))
+      @content
+
+  @else if $point == 1
+    @media (max-width: ($point_1 + px))
+      @content
+
+//padding лінійна інтерполяція
+@mixin adaptiv-padding($pcSize, $mobSize,$point,$mode)
+  $addSize: $mobSize - $pcSize
+  $addSize2: $point - $w_max
+  $aa: ($addSize2)*($addSize)/(360-$w_max)+$pcSize
+  @if $mode == 1
+    padding-top: #{$aa+px}
+  @if $mode == 2
+    padding-right: #{$aa+px}
+  @if $mode == 3
+    padding-bottom: #{$aa+px}
+  @if $mode == 4
+    padding-left: #{$aa+px}
+
+@mixin adaptivPadding($pcSize, $mobSize,$mode)
+  @include adaptiv-padding($pcSize,$mobSize,$point_zero,$mode)
+  @media (max-width: $point_5+px)
+    @include adaptiv-padding($pcSize,$mobSize,$point_5,$mode)
+  @media (max-width: $point_4+px)
+    @include adaptiv-padding($pcSize,$mobSize,$point_4,$mode)
+  @media (max-width: $point_3+px)
+    @include adaptiv-padding($pcSize,$mobSize,$point_3,$mode)
+  @media (max-width: $point_2+px)
+    @include adaptiv-padding($pcSize,$mobSize,$point_2,$mode)
+  @media (max-width: $point_1+px)
+    @include adaptiv-padding($pcSize,$mobSize,$point_1,$mode)

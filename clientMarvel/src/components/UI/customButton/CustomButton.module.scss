@@ -1,0 +1,39 @@
+@import "./../../../styles/variables.sass";
+@import "../../../styles/fonts.sass";
+
+$dark: rgb(29, 29, 29);
+$light: #fff;
+$primary: rgb(162, 162, 246);
+$borderRadius: 12px;
+
+.customButton {
+  cursor: pointer;
+  outline: none;
+  padding: 0.25rem 1rem;
+  border-radius: $borderRadius;
+  font-size: 1rem;
+  font-family: inherit;
+  background: $primary;
+  color: $dark;
+  border: 1px solid transparent;
+  transition: 0.3s ease all;
+
+  &:hover {
+    border-color: $primary;
+    background: rgba($primary, 0.1);
+    color: $primary;
+  }
+  &:active {
+    border-color: $primary;
+    background: linear-gradient(rgba($primary, 0.2), rgba($primary, 0.3));
+    color: $primary;
+  }
+}
+
+.fullWIdth {
+  width: 100%;
+}
+
+.orange {
+  background: orange;
+}

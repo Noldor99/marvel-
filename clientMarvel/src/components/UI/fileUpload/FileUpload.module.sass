@@ -1,0 +1,43 @@
+.drop-container
+  display: flex
+  padding-bottom: 54px
+  position: relative
+
+  &:hover .drop-title
+    color: #222
+
+.drop-title
+  font-weight: 400
+  font-size: 16px
+  line-height: 26px
+  border-radius: 4px 0px 0px 4px
+  padding: 14px
+  height: 54px
+  transition: color 0.3s
+  border: 1px solid #D0CFCF
+
+  &.error
+    color: #CB3D40
+    border: 1px solid #CB3D40
+
+.upload__input
+  width: 350px
+  max-width: 100%
+  border-radius: 0px 4px 4px 0px
+  padding: 14px
+  height: 54px
+  border: 1px solid #D0CFCF
+
+  &.error
+    border: 1px solid #CB3D40
+
+  &::file-selector-button
+    display: none
+
+.FileUploadError
+  position: absolute
+  bottom: 26px
+  left: 20px
+
+  &.error
+    color: #CB3D40

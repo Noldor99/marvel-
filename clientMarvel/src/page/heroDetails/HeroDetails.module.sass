@@ -1,0 +1,36 @@
+@import "./../../styles/variables.sass"
+@import "../../styles/fonts.sass"
+
+.home__container
+  margin-top: 25px
+  p
+    margin-bottom: 15px
+
+.body
+  display: flex
+  gap: 20px
+  @include breakpoint($point: 3)
+    display: block
+
+.power
+  margin-top: 20px
+
+.power__container
+  display: flex
+  justify-content: space-between
+
+.power__title
+  font-size: 20px
+  font-weight: bold
+  margin-bottom: 12px
+
+.slider
+  width: 400px
+  margin-bottom: 40px
+  @include breakpoint($point: 2)
+    width: 300px
+
+.home__btn
+  margin-top: 20px
+  display: flex
+  justify-content: space-between
