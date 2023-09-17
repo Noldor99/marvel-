@@ -17,9 +17,8 @@ const Modal: React.FC<ModalProps> = ({ children, title, onClose, open }) => {
   return (
     <div className={css.container} onClick={onClose}>
       <div className={css.body} onClick={handleContentClick}>
-        <h2>{title}</h2>
+        <h2 className={css.title}>{title}</h2>
         {children}
-        <button onClick={onClose}>Close</button>
       </div>
     </div>
   );

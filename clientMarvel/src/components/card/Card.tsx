@@ -2,8 +2,10 @@ import { FC } from 'react';
 import { FaTrash } from 'react-icons/fa';
 import { useNavigate } from 'react-router-dom';
 import { BASE_URL_SERVER } from '../../constants/url';
+import { useModal } from '../../hook/useModal';
 import { IHero } from '../../model';
 import { useDeleteHeroMutation } from '../../store/api/heroApi';
+import Modal from '../modal/Modal';
 import CustomButton from '../UI/customButton/CustomButton';
 import IconButton from '../UI/iconButton/IconButton';
 import css from './Card.module.sass'
@@ -15,6 +17,8 @@ interface CardProps {
 const Card: FC<CardProps> = ({ hero }: CardProps) => {
 
   const { id, catch_phrase, nickname, title_img, origin_description } = hero
+
+  const { isOpen, openModal, closeModal } = useModal()
 
   const [deleteHero] = useDeleteHeroMutation();
 
@@ -45,14 +49,28 @@ const Card: FC<CardProps> = ({ hero }: CardProps) => {
       <div className={css.cart__btn}>
         <CustomButton onClick={() => navigate(`hero/${id}`)}>Info</CustomButton>
         <div className={css.btn__body}>
-          <IconButton
-            onClick={() => {
-              deleteHero(hero.id)
-              navigate(-1)
-            }}
-          >
+          <IconButton onClick={openModal}>
             <FaTrash />
           </IconButton>
+          <Modal
+            open={isOpen} onClose={closeModal}
+            title='Do you want delete this hero?'
+          >
+            <div className={css.modal__body}>
+              <CustomButton type="button" onClick={closeModal}>
+                no
+              </CustomButton>
+              <CustomButton
+                red
+                onClick={() => {
+                  deleteHero(hero.id)
+                  navigate(-1)
+                }}
+              >
+                yes
+              </CustomButton>
+            </div>
+          </Modal>
           <CustomButton
             fullWIdth
             onClick={() => navigate(`create/${id}`)}>Edit</CustomButton>
