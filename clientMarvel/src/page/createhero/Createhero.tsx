@@ -1,12 +1,26 @@
-import { useState, ChangeEvent, FormEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import CustomButton from '../../components/UI/customButton/CustomButton';
 import CustomInput from '../../components/UI/customInput/CustomInput';
-import FileUpload from '../../components/UI/fileUpload/FileUpload';
 import { useTypedSelector } from '../../hook/useTypedSelector';
-import { ICreateHero, IHero } from '../../model';
+import { IHero } from '../../model';
 import { useCreateHeroMutation, useUpdateHeroMutation } from '../../store/api/heroApi';
+import validationSchema from '../../schema'
+import { SubmitHandler, useForm } from 'react-hook-form';
+import { yupResolver } from '@hookform/resolvers/yup';
 import css from './Createhero.module.sass'
+import FileUploadValid from '../../components/UI/fileUploadValid/FileUploadValid';
+
+interface IInput {
+  nickname: string,
+  real_name: string,
+  origin_description: string,
+  catch_phrase: string,
+}
+
+export interface IFormData extends IInput {
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  title_img?: any
+}
 
 
 const initialState = {
@@ -25,14 +39,20 @@ const CreateHeroPage = () => {
 
   const { heroes } = useTypedSelector(state => state.hero);
 
-  const numericId = parseInt(id, 10);
 
-  const heroesEdit = heroes.find((item: IHero) => item.id === numericId);
+  const heroesEdit = heroes.find((item: IHero) => item.id === parseInt(id, 10));
 
-  const [formData, setFormData] = useState<ICreateHero>(() => {
-    const newState = detectForm(id, initialState, heroesEdit);
-    return newState;
+  const {
+    register,
+    handleSubmit,
+    reset,
+    formState: { errors, isValid },
+  } = useForm({
+    resolver: yupResolver(validationSchema),
+    mode: 'onChange',
+    defaultValues: detectForm(id, initialState, heroesEdit)
   });
+
 
   const [createHeroMutation] = useCreateHeroMutation();
 
@@ -48,11 +68,9 @@ const CreateHeroPage = () => {
   }
 
 
-  const handleFormSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmit: SubmitHandler<IFormData> = async (data) => {
 
-    const { nickname, real_name, origin_description, catch_phrase, title_img } = formData;
-
+    const { nickname, real_name, origin_description, catch_phrase, title_img } = data;
 
     const formDataObj = new FormData();
     formDataObj.append('nickname', nickname);
@@ -60,7 +78,7 @@ const CreateHeroPage = () => {
     formDataObj.append('origin_description', origin_description);
     formDataObj.append('catch_phrase', catch_phrase);
     if (title_img) {
-      formDataObj.append('title_img', title_img);
+      formDataObj.append('title_img', title_img[0]);
     }
     if (id === "ADD") {
       await createHeroMutation(formDataObj);
@@ -68,68 +86,39 @@ const CreateHeroPage = () => {
       await updateHeroMutation({ id, formDataObj });
 
     }
-    try {
-      setFormData(initialState);
-    } catch (error) {
-      // Handle error
-      console.error(error);
-    }
+    reset(initialState);
   };
 
-  const handleInputChange = (e: ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData(prevFormData => ({
-      ...prevFormData,
-      [name]: value,
-    }));
-  };
 
-  const handlePictureChange = (e: ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files && e.target.files.length > 0) {
-      const file = e.target.files[0];
-      setFormData(prevFormData => ({
-        ...prevFormData,
-        title_img: file,
-      }));
-    }
-  };
 
   return (
     <div className={css.container}>
       <h1>{detectForm(id, 'Add New Hero', 'Edit Hero')}</h1>
       <form
         className={css.form__body}
-        onSubmit={handleFormSubmit}
+        onSubmit={handleSubmit(onSubmit)}
       >
-        <CustomInput
-          label='Nickname'
-          name="nickname"
-          value={formData?.nickname}
-          onChange={handleInputChange}
-
-        />
-        <CustomInput
-          label='Real name'
-          name="real_name"
-          value={formData?.real_name}
-          onChange={handleInputChange}
-        />
-        <CustomInput
-          label='Origin description'
-          name="origin_description"
-          value={formData?.origin_description}
-          onChange={handleInputChange}
-        />
-        <CustomInput
-          label='Catch phrase'
-          name="catch_phrase"
-          value={formData?.catch_phrase}
-          onChange={handleInputChange}
-        />
+        {[
+          { label: 'Nickname', field: 'nickname', type: 'text' },
+          { label: 'Real name', field: 'real_name', type: 'text' },
+          { label: 'Origin description', field: 'origin_description', type: 'text' },
+          { label: 'Catch phrase', field: 'catch_phrase', type: 'text' },
+        ].map((input) => (
+          <CustomInput
+            key={input.field}
+            label={input.label}
+            name={input.field}
+            register={register}
+            errors={errors} />
+        ))}
         <div>
-          <FileUpload handleImageChange={handlePictureChange} />
+          <FileUploadValid
+            name='title_img'
+            register={register}
+            errors={errors}
+          />
           <div className={css.button__container}>
-            <CustomButton orange type="submit">
+            <CustomButton disabled={!isValid} orange type="submit">
               {detectForm(id, "Save Hero", "Edit Hero")}
             </CustomButton>
             <CustomButton onClick={() => naigate(-1)}>

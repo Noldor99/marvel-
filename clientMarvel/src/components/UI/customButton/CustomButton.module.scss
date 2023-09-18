@@ -28,6 +28,12 @@ $borderRadius: 12px;
     background: linear-gradient(rgba($primary, 0.2), rgba($primary, 0.3));
     color: $primary;
   }
+  &:disabled {
+    cursor: not-allowed;
+    background: rgba($primary, 0.5);
+    border-color: $light;
+    color: $light;
+  }
 }
 
 .fullWIdth {

@@ -1,17 +1,24 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import React, { useState } from 'react';
-import css from './CustomInput.module.scss';
+import css from './CustomInput.module.sass'
 
 interface CustomInputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   label: string;
-  errorMessage?: string;
+  name?: string;
+  errors?: any
+  register?: any
 }
 
-const CustomInput: React.FC<CustomInputProps> = ({
-  errorMessage,
-  value,
-  label,
-  ...props
-}) => {
+const InputStandart: React.FC<CustomInputProps> = (props) => {
+
+  const { register, errors, name, label, ...propsRe } = props
+
+  let hasError = null
+  if (name) {
+
+    hasError = !!errors?.[name];
+  }
+
   const [focused, setFocused] = useState(false);
 
   const handleFocus = () => {
@@ -19,20 +26,21 @@ const CustomInput: React.FC<CustomInputProps> = ({
   };
 
   return (
-    <div className={`${css.customInput} ${focused || value ? css.hasValue : ''}`}>
-      <label className={css.inputLabel}>{label}</label>
+    <div className={`${css.customInput} ${focused ? css.hasValue : ''}`}>
+      <label
+        className={hasError ? css.errorLabel : css.inputLabel}
+      >{label}</label>
       <input
         type="text"
         className={css.inputField}
-        value={value}
+        {...(register && { ...register(name) })}
         onFocus={handleFocus}
         onBlur={() => setFocused(false)}
-        {...props}
+        {...propsRe}
       />
-      <div className={css.inputLine}></div>
-      <span>{errorMessage}</span>
+      {name && <span>{errors?.[name]?.message}</span>}
     </div>
   );
 };
 
-export default CustomInput;
+export default InputStandart;

@@ -1,5 +1,6 @@
 .drop-container
   display: flex
+  padding-bottom: 54px
   position: relative
 
   &:hover .drop-title
@@ -16,6 +17,11 @@
   border: 1px solid #D0CFCF
   border-right: none
 
+  &.error
+
+    border: 1px solid #CB3D40
+    border-right: none
+
 .upload__input
   width: 350px
   max-width: 100%
@@ -24,6 +30,9 @@
   height: 54px
   border: 1px solid #D0CFCF
 
+  &.error
+    border: 1px solid #CB3D40
+
   &::file-selector-button
     display: none
 
@@ -31,3 +40,6 @@
   position: absolute
   bottom: 26px
   left: 20px
+
+  &.error
+    color: #CB3D40

@@ -1,0 +1,54 @@
+@import "./../../../styles/variables.sass"
+@import "../../../styles/fonts.sass"
+
+.customInput
+  position: relative
+  width: 100%
+  &.hasValue .inputLabel
+    color: #000
+    font-size: 12px
+
+  &.hasValue .inputLine
+    background-color: #000
+
+  .inputLabel
+    color: #8d8d8d
+    font-size: 12px
+    font-weight: 500
+    line-height: 20px
+    position: absolute
+    top: 0
+    left: 0
+    transform: translateY(-100%)
+    pointer-events: none
+    transition: color 0.3s, font-size 0.3s, transform 0.3s
+
+  .inputField
+    width: 100%
+    border: none
+    border-bottom: 1px solid #8d8d8d
+    outline: none
+    font-family: "Poppins"
+    font-size: 12px
+    font-weight: 500
+    line-height: 20px
+    color: #000
+    transition: color 0.3s, font-size 0.3s
+    padding-bottom: 10px
+    padding-top: 5px
+
+    &:focus + .inputLine
+      width: 100%
+
+    &:focus ~ .inputLabel
+      color: #000
+      font-size: 14px
+      transform: translateY(-120%)
+
+  span
+    font-size: 12px
+    padding: 3px
+    color: red
+
+.errorLabel
+  color: red
