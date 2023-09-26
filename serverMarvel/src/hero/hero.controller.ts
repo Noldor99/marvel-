@@ -16,6 +16,7 @@ import { CreateHeroDto } from './dto/create-hero.dto';
 import { UpdateHeroDto } from './dto/update-hero.dto';
 import { ApiConsumes, ApiParam, ApiQuery, ApiTags } from '@nestjs/swagger';
 import { FileInterceptor } from '@nestjs/platform-express';
+import { FindAllWithPaginationDto } from './dto/findAllWithPagination.dto';
 
 @ApiTags('hero')
 @Controller('hero')
@@ -32,12 +33,26 @@ export class HeroController {
   @Get('pagination')
   @ApiQuery({ name: 'page', type: Number, required: false, example: 1 })
   @ApiQuery({ name: 'limit', type: Number, required: false, example: 4 })
-  async findAllWithPagination(
-    @Query('page') page = 1,
-    @Query('limit') limit = 4,
-  ) {
-    const [heroes, total] = await this.heroService.findAllHero(page, limit);
-    return { heroes, total };
+  @ApiQuery({
+    name: 'brandName',
+    type: String,
+    required: false,
+    example: 'Simple',
+  })
+  @ApiQuery({ name: 'minPrice', type: Number, required: false, example: 0 })
+  @ApiQuery({ name: 'maxPrice', type: Number, required: false, example: 1000 })
+  async findAllWithPagination(@Query() params: FindAllWithPaginationDto) {
+    const [heroes, total, maxPrice] = await this.heroService.findAllHero(
+      params,
+    );
+    return { heroes, total, maxPrice };
+  }
+
+  @Get('search')
+  @ApiQuery({ name: 'query', type: String, required: false, example: 'super' })
+  async searchHeroes(@Query('query') query: string) {
+    const heroes = await this.heroService.searchHeroesByName(query);
+    return heroes;
   }
 
   @Get(':id')

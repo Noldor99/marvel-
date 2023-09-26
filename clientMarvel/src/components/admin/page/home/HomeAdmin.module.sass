@@ -1,0 +1,46 @@
+@import "../../../../styles/variables.sass"
+@import "../../../../styles/fonts.sass"
+
+.container
+  display: flex
+  flex-direction: column
+  gap: 20px
+  max-width: 1440px
+  @include paper__sharp
+
+.title
+  @include typografy__h2
+
+.content
+  display: flex
+  justify-content: space-between
+  gap: 50px
+  padding-bottom: 25px
+  @include  paper__rounding
+  @include breakpoint($point: 2)
+    flex-direction: column
+    gap: 20px
+
+.user__content
+  display: flex
+  justify-content: space-between
+
+.body
+  @include paper__rounding
+  padding-bottom: 20px
+  display: flex
+  flex-direction: column
+  gap: 30px
+
+.form__body
+  padding-top: 30px
+  display: flex
+  gap: 30px
+  flex-direction: column
+
+.btn__container
+  display: flex
+  gap: 30px
+  @include breakpoint($point: 2)
+    flex-direction: column
+    gap: 20px

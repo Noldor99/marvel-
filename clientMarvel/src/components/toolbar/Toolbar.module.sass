@@ -1,0 +1,37 @@
+@import "../../styles/variables.sass"
+@import "../../styles/fonts.sass"
+
+.sidebar
+  z-index: 100
+  width: $sidebarWidth
+  background: white
+  height: calc(100vh - 116px)
+  padding: 24px
+  position: relative
+  left: -100%
+  transition: 850ms
+.sidebarOpen
+  left: 0
+  transition: 350ms
+
+.title
+  padding-bottom: 30px
+  text-align: center
+  @include typografy__h2
+
+@include breakpoint($point: 3)
+  .sidebar
+    height: 100vh
+    position: fixed
+    top: 0
+    left: -100%
+    transition: 850ms
+  .sidebarOpen
+    left: 0
+    transition: 350ms
+  .blur
+    left: $sidebarWidth
+    width: 100vh
+    height: 100vh
+    backdrop-filter: blur(2px)
+    position: absolute

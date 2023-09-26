@@ -55,6 +55,7 @@ $headerHeight: 60px;
       height: 100%;
       position: static;
       display: flex;
+      gap: 20px;
       flex-direction: row;
       justify-content: center;
       align-items: center;
@@ -84,12 +85,9 @@ $headerHeight: 60px;
           margin-bottom: $spacing-lg;
         }
         li {
-          &:not(:last-child) {
-            margin-bottom: 0;
-            margin-right: $spacing-md;
-            @include breakpoint($point: 3) {
-              margin-bottom: $spacing-lg;
-            }
+          margin: 0 10px;
+
+          @include breakpoint($point: 3) {
           }
           a {
             text-decoration: none;
@@ -129,5 +127,9 @@ $headerHeight: 60px;
         display: flex;
       }
     }
+  }
+  .badge__box {
+    display: flex;
+    gap: 40px;
   }
 }

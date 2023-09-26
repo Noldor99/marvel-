@@ -1,10 +1,10 @@
 import Slider from 'react-slick';
 import 'slick-carousel/slick/slick.css';
 import 'slick-carousel/slick/slick-theme.css';
-import { IImage } from '../../model';
 import { FC } from 'react';
 import { BASE_URL_SERVER } from '../../constants/url';
 import css from './SimpleSlider.module.sass'
+import { IImage } from '../../model/imageModel';
 
 
 interface SliderProps {

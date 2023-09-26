@@ -1,0 +1,40 @@
+@import "./../../../styles/variables.sass"
+@import "../../../styles/fonts.sass"
+
+$smSpacing: 8px
+$mdSpacing: 16px
+
+.buttonContainer
+  background: transparent
+  border-radius: $borderRadius
+  &:hover
+    box-shadow: inset 0 0 0 1px rgb(230,230,230)
+
+.buttonContainerActive
+  background: rgb(230,230,230)
+
+.btn
+  @include btnReset
+  width: 100%
+
+.button__content
+  display: flex
+  align-items: center
+  text-decoration: none
+  color: inherit
+  font-size: 16px
+  padding: calc($smSpacing - 2px) 0
+
+.buttonIcon
+  padding: $smSpacing $mdSpacing
+  display: flex
+  svg
+    font-size: 20px
+
+.buttonLabel
+  display: block
+  flex: 1
+  margin-left: $smSpacing
+
+.active
+  background: #efefef

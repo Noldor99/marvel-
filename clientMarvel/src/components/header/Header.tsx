@@ -4,17 +4,26 @@ import css from "./Header.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import Logo from "../UI/logo/Logo";
 import useMenuToggle from "../../hook/useMenuToggle";
+import { useTypedDispatch } from "../../hook/useTypedDispatch";
 import CustomButton from "../UI/customButton/CustomButton";
+import { useTypedSelector } from "../../hook/useTypedSelector";
+import WrapAdminButton from "./WrapAdminButton";
+import WrapBadge from "./WrapBadge";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { logout } = useTypedDispatch()
 
-  const { menuOpen, menuToggleHandler, closeMenu } = useMenuToggle();
+  const { menuOpen, menuToggleHandler } = useMenuToggle();
 
-  const ctaClickHandler = () => {
-    closeMenu()
-    navigate("/page-cta");
+  const { userInfo } = useTypedSelector((state) => state.auth)
+
+
+  const handleLogout = () => {
+    logout();
+    navigate('auth/login');
   };
+
 
   return (
     <header className={css.header}>
@@ -22,37 +31,25 @@ const Header = () => {
         <Link to="/" className={css.header__content__logo}>
           <Logo color={'white'} />
         </Link>
-        <nav
+        <div
           className={`${css.header__content__nav} 
-            ${menuOpen ? css.isMenu : ""}`}
+          ${menuOpen ? css.isMenu : ""}`}
         >
-          <ul>
-            <li>
-              <Link to="/page-one" onClick={menuToggleHandler}>
-                PageOne
-              </Link>
-            </li>
-            <li>
-              <Link to="/page-two" onClick={menuToggleHandler}>
-                PageTwo
-              </Link>
-            </li>
-            <li>
-              <Link to="/page-three" onClick={menuToggleHandler}>
-                PageThree
-              </Link>
-            </li>
-          </ul>
-          <CustomButton onClick={ctaClickHandler}>
-            CTA Page
+          <WrapAdminButton />
+          <CustomButton onClick={handleLogout}>
+            {userInfo ? 'Logout' : 'Login'}
           </CustomButton>
-        </nav>
-        <div className={css.header__content__toggle}>
-          {!menuOpen ? (
-            <BiMenuAltRight onClick={menuToggleHandler} />
-          ) : (
-            <AiOutlineClose onClick={menuToggleHandler} />
-          )}
+          <p>{userInfo?.email}</p>
+        </div>
+        <div className={css.badge__box}>
+          <WrapBadge />
+          <div className={css.header__content__toggle}>
+            {!menuOpen ? (
+              <BiMenuAltRight onClick={menuToggleHandler} />
+            ) : (
+              <AiOutlineClose onClick={menuToggleHandler} />
+            )}
+          </div>
         </div>
       </div>
     </header>

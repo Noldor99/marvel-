@@ -1,0 +1,52 @@
+@import "../../../../styles/variables.sass"
+@import "../../../../styles/fonts.sass"
+
+$dark: rgb(67, 112, 226)
+$light: #fff
+$primary: rgb(162, 162, 246)
+$bg: rgb(244, 244, 255)
+
+// spacing
+$spacing-md: 16px
+$spacing-lg: 32px
+
+// border radius
+$borderRadius: 12px
+
+// header height
+$headerHeight: 60px
+
+.header
+  background: $dark
+  width: 100%
+  height: $headerHeight
+  padding: 0 3rem
+  @include breakpoint($point: 3)
+    padding: 0 1.5rem
+
+  transition: 0.3s ease all
+
+  &__content
+    overflow: hidden
+    color: $light
+    margin: 0 auto
+    max-width: 1920px
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    position: relative
+    z-index: 99
+
+    &__logo
+      font-size: 2rem
+      font-weight: bold
+      text-decoration: none
+      color: $light
+      width: 100px
+      z-index: 10
+
+.toolbar__btn
+  display: none
+  @include breakpoint($point: 3)
+    display: block

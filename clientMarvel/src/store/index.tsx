@@ -1,20 +1,34 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
-import { heroApi } from "./api/heroApi";
+import { baseHeroApi } from "./api/baseHeroApi";
+import { roleApi } from "./api/roleApi";
+import { userApi } from "./api/userApi";
+import { authReducer } from "./slice/authSlice";
+import { cartReducer } from "./slice/cartSlice";
 import { filterReducer } from "./slice/filterSlice";
 import { heroReducer } from "./slice/heroSlice";
+import { likeReducer } from "./slice/likeSlice";
 
 
 const rootReducer = combineReducers({
   filter: filterReducer,
   hero: heroReducer,
-  [heroApi.reducerPath]: heroApi.reducer,
+  auth: authReducer,
+  cart: cartReducer,
+  like: likeReducer,
+  [baseHeroApi.reducerPath]: baseHeroApi.reducer,
+  [userApi.reducerPath]: userApi.reducer,
+  [roleApi.reducerPath]: roleApi.reducer,
 });
 
 const store = configureStore({
   reducer: rootReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
-    }).concat(heroApi.middleware),
+    }).concat(
+      baseHeroApi.middleware,
+      userApi.middleware,
+      roleApi.middleware,
+    ),
   devTools: true,
 });
 

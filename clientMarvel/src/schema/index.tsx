@@ -19,8 +19,9 @@ const validationSchema = yup.object().shape({
     .string()
     .required('Name is required')
     .min(2, "the min is 2"),
-  title_img: yup
-    .mixed()
+  price: yup
+    .number()
+    .required('Price is required'),
 });
 
 export default validationSchema;

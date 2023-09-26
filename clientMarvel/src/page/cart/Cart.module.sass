@@ -1,0 +1,88 @@
+@import "./../../styles/variables.sass"
+@import "../../styles/fonts.sass"
+
+.wrap
+  margin-top: 20px
+
+.cart__container
+  padding: 20px 15px
+  margin: 0 auto
+  max-width: 1400px
+  @include paper__sharp
+
+.cart__body
+  display: flex
+  flex-direction: column
+  gap: 25px
+
+.cart__title
+  @include typografy__h2
+
+.card__content
+  @include paper__rounding
+  .card__imgContainer
+    min-height: 200px
+    position: relative
+    .card__imgBody
+      position: absolute
+      top: 0px
+      left: 0px
+      height: 100%
+      width: 100%
+      object-fit: contain
+      background: white
+      img
+        width: 100%
+        height: 100%
+        object-fit: contain
+
+.box__top
+  display: flex
+  justify-content: space-between
+  padding-bottom: 40px
+
+.checkout__btn
+  display: flex
+  justify-content: space-between
+  padding-top: 20px
+
+.checkout__container
+  @include paper__sharp
+  padding: 20px
+
+.checkout__content
+  display: flex
+  flex-direction: column
+  gap: 25px
+
+.checkou__text
+  display: flex
+  justify-content: space-between
+
+.calc__wrap
+  display: flex
+  justify-content: space-between
+  align-items: center
+  @include breakpoint($point: 2)
+    flex-direction: column-reverse
+    align-items: normal
+    gap: 30px
+
+.calc__body
+  flex: 50% 0
+  padding-right: 20px
+
+.calc__wrap__title
+  display: flex
+  justify-content: space-between
+  align-items: center
+  flex: 50% 0
+
+.btn__container
+  display: flex
+  justify-content: space-between
+  margin-top: 30px
+  @include breakpoint($point: 2)
+    flex-direction: column-reverse
+    align-items: normal
+    gap: 15px

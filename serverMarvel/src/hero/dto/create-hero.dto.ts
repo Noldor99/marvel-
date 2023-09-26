@@ -1,5 +1,4 @@
-import { ApiProperty, ApiPropertyOptional } from '@nestjs/swagger';
-import { CreatePowerDto } from '../../power/dto/create-power.dto';
+import { ApiProperty } from '@nestjs/swagger';
 
 export class CreateHeroDto {
   @ApiProperty({
@@ -32,4 +31,13 @@ export class CreateHeroDto {
     description: 'Image of the hero_title',
   })
   readonly title_img: any;
+
+  @ApiProperty({
+    example: 'Simple',
+    description: 'Brand of the device',
+  })
+  brandName: string;
+
+  @ApiProperty({ example: 999, description: 'Price of the device' })
+  price: number;
 }

@@ -1,12 +1,19 @@
 @import "./../../styles/variables.sass"
 @import "../../styles/fonts.sass"
 
-.container__home
-  padding-top: 20px
+.container
+  display: flex
+
+.content
+  padding: 15px
+  flex: 1
+
+.toolbar__btn
+  display: none
+  @include breakpoint($point: 3)
+    display: block
 
 .topButton
   display: flex
   flex-direction: column
   margin-top: 20px
-
-  

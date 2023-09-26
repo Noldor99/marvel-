@@ -22,6 +22,8 @@ $linear-gradient: linear-gradient(180.99deg, rgba(255, 255, 255, 0) 6.19%, rgba(
 $w_max: 1440
 $point_zero: 1440
 
+$sidebarAdminWidth: 220px
+$sidebarWidth: 220px
 // Міксин для скидання стилів кнопки
 @mixin btnReset
   font-family: inherit
@@ -33,6 +35,30 @@ $point_zero: 1440
   font-size: inherit
   text-align: inherit
   padding: 0
+
+@mixin containerGlobal
+  max-width: 1440px
+  margin: 0 auto
+  padding: 0 25px
+  @include breakpoint($point: 2)
+    padding: 0 15px
+
+@mixin paper__rounding
+  border: 1px solid #e0e0e0
+  border-radius: 12px
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px
+  padding: 26px
+
+@mixin paper__sharp
+  border: 1px solid #e0e0e0
+  border-radius: 0
+  background: #fff
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 20px 0px
+  padding: 26px
+
+@mixin typografy__h2
+  font-size: 2.5rem
 
 //mixin
 $point_5: 1120

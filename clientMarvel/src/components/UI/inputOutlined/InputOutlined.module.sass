@@ -1,0 +1,68 @@
+
+.validText
+  font-weight: 400
+  font-size: 12px
+  line-height: 14px
+  color: #7e7e7e
+  margin-top: 4px
+  margin-left: 20px
+
+.error
+  margin-top: 5px
+  font-weight: 400
+  font-size: 12px
+  line-height: 14px
+  color: #cb3d40
+
+.inputBox
+  position: relative
+
+  & input
+    width: 100%
+    padding: 14px 16px
+    border: 1px solid #d0cfcf
+    background: #f8f8f8
+    border-radius: 4px
+    outline: none
+
+    font-size: 16px
+    line-height: 26px
+    transition: 0.5s
+
+  & span
+    position: absolute
+    left: 0
+    padding: 15px
+    pointer-events: none
+    font-weight: 400
+    font-size: 16px
+    line-height: 26px
+    transition: 0.5s
+
+.inputBox input:valid ~ span,
+.inputBox input:focus ~ span
+  transform: translateX(10px) translateY(-7px)
+  font-size: 0.65em
+  padding: 0 10px
+  background: #f8f8f8
+  font-weight: 500
+  font-size: 12px
+  line-height: 14px
+
+.errorInput
+  border-color: #cb3d40 !important
+
+.errorText
+  display: none
+
+.errorLabel
+  color: #cb3d40
+
+.validInput
+  border-color: #d0cfcf
+
+.validText
+  display: block
+
+.validLabel
+  color: #7e7e7e

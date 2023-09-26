@@ -1,46 +1,38 @@
-import { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import Toolbar from "../../components/toolbar/Toolbar";
 import CustomButton from "../../components/UI/customButton/CustomButton";
-import { Pagination } from "../../components/UI/pagination";
 import CardList from "../../components/сardList/CardList";
-import { useTypedDispatch } from "../../hook/useTypedDispatch";
-import { useTypedSelector } from "../../hook/useTypedSelector";
-import { useLazyGetHeroesWithPaginationQuery } from "../../store/api/heroApi";
+import { useSidebarContext, SidebarContextType } from "../../context/SidebarContext";
 import css from './Home.module.sass'
+import WrapPagination from "./WrapPagination";
+import WrapSearch from "./WrapSearch";
 
 
 const Home = () => {
 
-  const { totalPage, heroes } = useTypedSelector(state => state.hero);
-  const { currentPage } = useTypedSelector(state => state.filter);
-  const { setCurrentPageAction } = useTypedDispatch()
-  const [fetchReposAll] = useLazyGetHeroesWithPaginationQuery()
 
-  const navigate = useNavigate()
+  const { setSidebarOpen } = useSidebarContext() as SidebarContextType;
 
-  useEffect(() => {
-    fetchReposAll({ page: currentPage, limit: 4 })
-  }, [currentPage, fetchReposAll]);
 
-  console.log(heroes)
 
   return (
-    <div className={`containerGlobal ${css.container__home}`}>
-      <div className={css.topButton}>
-        <CustomButton
-          onClick={() => navigate('/create/ADD')}
-          orange
-        >
-          Create
-        </CustomButton>
+    <div className={css.container}>
+      <div className={css.toolbar}>
+        <Toolbar />
       </div>
-      <CardList />
-      <div>
-        <Pagination
-          totalPage={totalPage}
-          currentPage={currentPage}
-          onChangePage={(value: number) => (setCurrentPageAction(value))}
-        />
+      <div className={css.content}>
+        <div className={css.toolbar__btn}>
+          <CustomButton onClick={() => setSidebarOpen(true)}>
+            Sidebar
+          </CustomButton>
+        </div>
+        <div className={css.topButton}>
+          <WrapSearch />
+
+        </div>
+        <CardList />
+        <div>
+          <WrapPagination />
+        </div>
       </div>
     </div >
   )

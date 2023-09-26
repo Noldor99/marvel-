@@ -1,0 +1,33 @@
+@import "../../../../styles/variables.sass"
+@import "../../../../styles/fonts.sass"
+
+.sidebar
+  z-index: 100
+  width: $sidebarAdminWidth
+  background: white
+  height: 100vh
+  padding: 24px
+  position: relative
+  left: -100%
+  transition: 850ms
+.sidebarOpen
+  left: 0
+  transition: 350ms
+
+@include breakpoint($point: 3)
+  .sidebar
+    height: 100vh
+    position: fixed
+    top: 0
+    left: -100%
+    transition: 850ms
+  .sidebarOpen
+    left: 0
+    transition: 350ms
+  .blur
+    top: 0
+    left: $sidebarAdminWidth
+    width: 100vh
+    height: 100vh
+    backdrop-filter: blur(2px)
+    position: absolute
